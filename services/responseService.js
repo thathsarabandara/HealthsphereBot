@@ -1,22 +1,39 @@
-// services/responseService.js
-async function generateResponse(message, userSession, section) {
-    let response;
+const { welcomeResponse } = require('../responses/welcomeResponse');
+const { englishResponse } = require('../responses/englishResponse');
+const { sinhalaResponse } = require('../responses/sinhalaResponse');
+const { tamilResponse } = require('../responses/tamilResponse');
+const { getButtonsForSection } = require('./sectionService');
 
+async function generateResponse(message, userSession, section) {
+    let responseText = '';
+    let buttons = []; // Initialize buttons array
+
+    // Generate response and buttons based on the section
     switch (section) {
         case 'home':
-            response = `Welcome to the Home section! How can I assist you today?`;
+            responseText = welcomeResponse(message); // Call welcomeResponse
+            buttons = getButtonsForSection(section); // Get buttons for the home section
             break;
-        case 'appointment':
-            response = `You're in the Appointment section. Would you like to book, check, or reschedule an appointment?`;
+        case 'english':
+            // Destructure response and buttons from the englishResponse function
+            ({ responseText: responseText, buttons } = await englishResponse(message));
             break;
-        case 'support':
-            response = `This is the Support section. You can view FAQs or speak with a representative.`;
+        case 'sinhala':
+            // Destructure response and buttons from the sinhalaResponse function
+            ({ responseText: responseText, buttons } = await sinhalaResponse(message));
+            break;
+        case 'tamil':
+            // Destructure response and buttons from the tamilResponse function
+            ({ responseText: responseText, buttons } = await tamilResponse(message));
             break;
         default:
-            response = `I'm here to help! You said: ${message}`;
+            responseText = `I'm here to help! You said: ${message}`;
+            buttons = getButtonsForSection(section); // Get buttons for default section
     }
+    console.log('Response Text:', responseText);
+    console.log('Buttons:', buttons);
 
-    return response;
+    return { responseText, buttons }; // Return both response and buttons
 }
 
 module.exports = { generateResponse };

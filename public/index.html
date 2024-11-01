@@ -8,19 +8,45 @@
     <link rel="stylesheet" href="/css/chatbot-theme.css">
 </head>
 <body>
-    <div id="chatContainer">
-        <header id="chatHeader">Welcome to Our Assistant</header>
+    <div class="bot-icon" >
+        <button class="send-button" onclick="openForm()">
+            <img src="./Assets/bot-image.png" alt="bot-btn" class="bot-img-icon">
+        </button>
+    </div>
+    <div class="chatContainer" id="myForm">
+        <div class="bot-name-area">
+            <div class="bot-picture">
+                <img src="./Assets/bot-image.png" alt="bot" class="bot-image">
+            </div>
+            <div class="bot-details">
+                <h1 class="bot-name">S O M I</h1>
+                <h5 class="bot-name-details">Supportive Observant Medical Informative Bot</h5>
+                <div class="bot-online-area">
+                    <div class="online-vector">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <circle cx="15" cy="12" r="5" fill="#1EFF00" />
+                        </svg>
+                    </div>
+                    <h4 class="online-text">Online</h4>
+                </div>
+            </div>
+            <div class="bot-close">
+                <button class="send-button" onclick="closeForm()">
+                    <img src="../Assets/close.png" alt="close-icon" class="close-icon">
+                </button>
+            </div>
+        </div>
         
         <!-- Chat window -->
-        <div id="chatBox"></div>
+        <div class="chatBox chatbot-messages" id="chatBox"></div>
 
         <!-- Dynamic Button Bar -->
-        <div id="buttonContainer"></div>
+        <div class="buttonContainer" id="buttonContainer"></div>
         
         <!-- Input bar -->
-        <div id="inputContainer">
-            <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off">
-            <button id="sendMessage">Send</button>
+        <div class="inputContainer">
+            <input type="text" class="messageInput" id="messageInput" placeholder="Type a message..." autocomplete="off">
+            <button class="sendMessage" id="sendMessage">➤</button>
         </div>
     </div>
     
