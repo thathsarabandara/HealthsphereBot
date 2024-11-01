@@ -26,9 +26,7 @@ async function generateResponse(message, userSession, section) {
             // Destructure response and buttons from the tamilResponse function
             ({ responseText: responseText, buttons } = await tamilResponse(message));
             break;
-        default:
-            responseText = `I'm here to help! You said: ${message}`;
-            buttons = getButtonsForSection(section); // Get buttons for default section
+            
     }
     console.log('Response Text:', responseText);
     console.log('Buttons:', buttons);

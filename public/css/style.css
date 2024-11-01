@@ -167,7 +167,7 @@ body {
     margin: 28px 0 0 100px;
 }
 .chatbot-messages {
-    height: 700px;
+    height: 600px;
     padding: 15px;
     overflow-y: scroll;
     border-bottom: 1px solid #ddd;
@@ -334,4 +334,12 @@ body {
     margin-top: 5px;
     display: block;
     text-align: right;
+}
+.home-icon{
+    width:30px;
+}
+.home-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
 }

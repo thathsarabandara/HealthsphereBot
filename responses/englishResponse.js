@@ -1,30 +1,37 @@
 const { getButtonsForSection } = require('../services/sectionService');
+const { webNavigationResponse } = require('./english/webNavigationResponse')
+const navigationKeywords = [
+    'Web Navigation',
+    'Register',
+    'Medical Packages',
+    'Pharmacy',
+    'Prescription History',
+    'Payment History',
+    'User Profile'
+];
 
-let firstTime = true; // Use a boolean for clarity
-
-function englishResponse(msg) {
+async function englishResponse(msg) {
     let responseText = '';
     let buttons = [];
 
-    if (firstTime) {
-        responseText = "'How can I assist you in English?'";
+    if (msg.includes('English')) {
+        responseText = ['🎉 Thank you for choosing English!', 
+            "🤗 I'm here to make your experience seamless and informative. Whether you have questions about our services, need help navigating the website, or want to find a doctor based on your symptoms, I'm just a message away!",
+            "💬 How can I assist you today? ",
+        ];
         buttons = getButtonsForSection('english'); // Correctly get buttons for 'english'
-        firstTime = false; // Set to false after the first response
-    } else if (msg.includes('Web Navigation')) {
-        responseText = "Here are the options for Web Navigation:";
-        buttons = getButtonsForSection('englishWebNavigation'); // Get buttons for Web Navigation
-    } else if (msg.includes('Find Doctor')) {
-        responseText = "How would you like to find a doctor?";
-        buttons = getButtonsForSection('englishFindDoctor'); // Get buttons for Find Doctor
-    } else if (msg.includes('Customer Care')) {
+    } else if (navigationKeywords.some(keyword => msg.includes(keyword))) {
+        ({ responseText: responseText, buttons } = await webNavigationResponse(msg));
+        
+    } else if (msg.includes('Customer Care','FAQs','Talk to Representative')) {
         responseText = "How can we assist you with Customer Care?";
         buttons = getButtonsForSection('englishCustomerCare'); // Get buttons for Customer Care
-    } else {
-        responseText = "I'm here to help! You said: " + msg;
-        buttons = getButtonsForSection('english'); // Default to English buttons
+    } else{
+        responseText = "How would you like to find a doctor?";
+        buttons = getButtonsForSection('englishFindDoctor'); // Get buttons for Find Doctor
     }
 
     return { responseText, buttons };
 }
 
-module.exports = { englishResponse };
+module.exports = { englishResponse  };

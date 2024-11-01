@@ -132,3 +132,9 @@ function showInput(visible) {
     function closeForm() {
     document.getElementById("myForm").style.display = "none";
     }
+    function home() {
+        const homeMessage = 'home';
+        socket.emit('message', homeMessage); // Send 'home' to the server
+        displayMessage(homeMessage, 'userMessage'); // Display user's home click
+    }
+    

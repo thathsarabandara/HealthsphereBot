@@ -23,7 +23,8 @@ function getButtonsForSection(section) {
         tamilFindDoctor: ['அறிகுறிகள் மூலம்', 'வகை மூலம்', 'பெயர் மூலம்'],
         englishCustomerCare: ['FAQs', 'Talk to Representative'],
         sinhalaCustomerCare: ['අවධාරණ ප‍්‍රශ්න', 'නියෝජිතයාට කතා කරන්න'],
-        tamilCustomerCare: ['அடிக்கடி கேட்கப்படும் கேள்விகள்', 'நிதானமா பேசவும்']
+        tamilCustomerCare: ['அடிக்கடி கேட்கப்படும் கேள்விகள்', 'நிதானமா பேசவும்'],
+        englishRegister:['Web Navigation', 'Find Doctor', 'Customer Care' ,'Stop Assitant']
     };
 
     return buttons[section] || [];
