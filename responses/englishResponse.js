@@ -1,6 +1,8 @@
 const { getButtonsForSection } = require('../services/sectionService');
+const { customerCareResponse } = require('./english/customCareResponse');
 const { findDoctorResponse } = require('./english/findDocotorResponse');
 const { webNavigationResponse } = require('./english/webNavigationResponse')
+
 const navigationKeywords = [
     'Web Navigation',
     'Register',
@@ -31,7 +33,7 @@ async function englishResponse(msg) {
         ({ responseText: responseText, buttons } = await webNavigationResponse(msg));
 
     } else if (customeCareKeywords.some(keyword =>msg.includes(keyword))) {
-        ({ responseText: responseText, buttons } = await findDoctorResponse(msg));
+        ({ responseText: responseText, buttons } = await customerCareResponse(msg));
     } else{
         ({ responseText: responseText, buttons } = await findDoctorResponse(msg));
     }

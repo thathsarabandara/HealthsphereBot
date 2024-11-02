@@ -1,30 +1,44 @@
 const { getButtonsForSection } = require('../services/sectionService');
+const { customerCareResponse } = require('./tamil/customCareResponse');
+const { findDoctorResponse } = require('./tamil/findDocotorResponse');
+const { webNavigationResponse } = require('./tamil/webNavigationResponse')
 
-let firstTime = true;
+const navigationKeywords = [
+    'வலை வழிசெலுத்தல்',
+    'பதிவு',
+    'மருத்துவ தொகுப்புகள்',
+    'மருந்தகம்',
+    'மருந்து வரலாறு',
+    'கட்டண வரலாறு',
+    'பயனர் சுயவிவரம்'
+];
+const customeCareKeywords = [
+    'வாடிக்கையாளர் பராமரிப்பு',
+    'FAQகள்',
+    'பிரதிநிதியிடம் பேசு'
 
-function tamilResponse(msg) {
+]
+
+async function englishResponse(msg) {
     let responseText = '';
     let buttons = [];
 
-    if (firstTime) {
-        responseText = "நான் உங்களுக்கு எவ்வாறு உதவ முடியும்?";
-        buttons = getButtonsForSection('tamil'); // Get buttons for 'tamil'
-        firstTime = false; // Set to false after the first response
-    } else if (msg.includes('இணைய வழிசெலுத்தல்')) {
-        responseText = "இணைய வழிசெலுத்தலுக்கான விருப்பங்கள் இங்கு உள்ளன:";
-        buttons = getButtonsForSection('tamilWebNavigation'); // Get buttons for Web Navigation
-    } else if (msg.includes('மருத்துவர் கண்டுபிடிக்கவும்')) {
-        responseText = "மருத்துவரைப் புகாரளிக்க நீங்கள் எப்படி விரும்புகிறீர்கள்?";
-        buttons = getButtonsForSection('tamilFindDoctor'); // Get buttons for Find Doctor
-    } else if (msg.includes('வாடிக்கையாளர் சேவை')) {
-        responseText = "வாடிக்கையாளர் சேவையில் உங்களுக்கு எவ்வாறு உதவ வேண்டும்?";
-        buttons = getButtonsForSection('tamilCustomerCare'); // Get buttons for Customer Care
-    } else {
-        responseText = "நான் உங்களுக்கு உதவ விரும்புகிறேன்! நீங்கள் கூறியது: " + msg;
-        buttons = getButtonsForSection('tamil'); // Default to Tamil buttons
+    if (msg.includes('සිංහල')) {
+        responseText = ['🎉 සිංහල තේරීම ගැන ස්තුතියි!',
+            "🤗 මම ඔබේ අත්දැකීම බාධාවකින් තොරව සහ තොරතුරු සපයන්නට මෙහි සිටිමි. ඔබට අපගේ සේවාවන් පිළිබඳ ප්‍රශ්න ඇත්නම්, වෙබ් අඩවියේ සැරිසැරීමට උදවු අවශ්‍ය වුවද, හෝ ඔබේ රෝග ලක්ෂණ මත පදනම්ව වෛද්‍යවරයකු සොයා ගැනීමට අවශ්‍ය වුවද, මම පණිවිඩයක් එපිටින් සිටිමි!",
+            "💬 මම අද ඔබට උදව් කරන්නේ කෙසේද?",
+            ];
+        buttons = getButtonsForSection('sinhala'); // Correctly get buttons for 'english'
+    } else if (navigationKeywords.some(keyword => msg.includes(keyword))) {
+        ({ responseText: responseText, buttons } = await webNavigationResponse(msg));
+
+    } else if (customeCareKeywords.some(keyword =>msg.includes(keyword))) {
+        ({ responseText: responseText, buttons } = await findDoctorResponse(msg));
+    } else{
+        ({ responseText: responseText, buttons } = await findDoctorResponse(msg));
     }
 
     return { responseText, buttons };
 }
 
-module.exports = { tamilResponse };
+module.exports = { englishResponse  };

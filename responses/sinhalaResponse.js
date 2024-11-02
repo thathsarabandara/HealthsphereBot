@@ -1,30 +1,44 @@
 const { getButtonsForSection } = require('../services/sectionService');
+const { customerCareResponse } = require('./sinhala/customCareResponse');
+const { findDoctorResponse } = require('./sinhala/findDocotorResponse');
+const { webNavigationResponse } = require('./sinhala/webNavigationResponse')
 
-let firstTime = true;
+const navigationKeywords = [
+    'වෙබ් සංචාලනය',
+    'ලියාපදිංචිය',
+    'වෛද්‍ය පැකේජ',
+    'ෆාමසිය',
+    'බෙහෙත් වට්ටෝරු ඉතිහාසය',
+    'ගෙවීම් ඉතිහාසය',
+    'පරිශීලක පැතිකඩ'
+];
+const customeCareKeywords = [
+    'පාරිභෝගික සේවාව',
+    'නිති අසන පැන',
+    'නියෝජිතයා සමඟ කතා කරන්න'
 
-function sinhalaResponse(msg) {
+]
+
+async function englishResponse(msg) {
     let responseText = '';
     let buttons = [];
 
-    if (firstTime) {
-        responseText = "ඔබට කෙසේ හැකියාවක් කරන්නද?";
-        buttons = getButtonsForSection('sinhala'); // Get buttons for 'sinhala'
-        firstTime = false; // Set to false after the first response
-    } else if (msg.includes('ව්‍යුහ විකල්ප')) {
-        responseText = "ව්‍යුහ විකල්ප සඳහා පහත විකල්ප බලන්න:";
-        buttons = getButtonsForSection('sinhalaWebNavigation'); // Get buttons for Web Navigation
-    } else if (msg.includes('මරුණුවන් වෞෂධ සොයාගන්න')) {
-        responseText = "මරුණුවන් වෞෂධ සොයාගන්න, කෙසේද?";
-        buttons = getButtonsForSection('sinhalaFindDoctor'); // Get buttons for Find Doctor
-    } else if (msg.includes('පාරිභෝගික සේවාව')) {
-        responseText = "පාරිභෝගික සේවාව ගැන ඔබට කෙසේද?";
-        buttons = getButtonsForSection('sinhalaCustomerCare'); // Get buttons for Customer Care
-    } else {
-        responseText = "මට ඔබට උදව් කිරීමට සතුටුයි! ඔබ කිව්වේ: " + msg;
-        buttons = getButtonsForSection('sinhala'); // Default to Sinhala buttons
+    if (msg.includes('සිංහල')) {
+        responseText = ['🎉 සිංහල තේරීම ගැන ස්තුතියි!',
+            "🤗 මම ඔබේ අත්දැකීම බාධාවකින් තොරව සහ තොරතුරු සපයන්නට මෙහි සිටිමි. ඔබට අපගේ සේවාවන් පිළිබඳ ප්‍රශ්න ඇත්නම්, වෙබ් අඩවියේ සැරිසැරීමට උදවු අවශ්‍ය වුවද, හෝ ඔබේ රෝග ලක්ෂණ මත පදනම්ව වෛද්‍යවරයකු සොයා ගැනීමට අවශ්‍ය වුවද, මම පණිවිඩයක් එපිටින් සිටිමි!",
+            "💬 මම අද ඔබට උදව් කරන්නේ කෙසේද?",
+            ];
+        buttons = getButtonsForSection('sinhala'); // Correctly get buttons for 'english'
+    } else if (navigationKeywords.some(keyword => msg.includes(keyword))) {
+        ({ responseText: responseText, buttons } = await webNavigationResponse(msg));
+
+    } else if (customeCareKeywords.some(keyword =>msg.includes(keyword))) {
+        ({ responseText: responseText, buttons } = await customerCareResponse(msg));
+    } else{
+        ({ responseText: responseText, buttons } = await findDoctorResponse(msg));
     }
 
     return { responseText, buttons };
 }
 
-module.exports = { sinhalaResponse };
+module.exports = { englishResponse  };
