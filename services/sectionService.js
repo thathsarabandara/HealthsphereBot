@@ -24,7 +24,8 @@ function getButtonsForSection(section) {
         englishCustomerCare: ['FAQs', 'Talk to Representative'],
         sinhalaCustomerCare: ['අවධාරණ ප‍්‍රශ්න', 'නියෝජිතයාට කතා කරන්න'],
         tamilCustomerCare: ['அடிக்கடி கேட்கப்படும் கேள்விகள்', 'நிதானமா பேசவும்'],
-        englishRegister:['Web Navigation', 'Find Doctor', 'Customer Care' ,'Stop Assitant']
+        englishRegister:['Web Navigation', 'Find Doctor', 'Customer Care' ,'Stop Assitant'],
+        englishDoctorCategory:['General Practitioner','Pediatrician','Cardiologist','Dermatologist','Neurologist','Oncologist','Psychiatrist','Endocrinologist','Gastroenterologist','Orthopedicsurgeon','Ophthalmologist','Pulmonologist']
     };
 
     return buttons[section] || [];

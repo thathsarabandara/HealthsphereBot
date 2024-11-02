@@ -16,7 +16,7 @@ function webNavigationResponse(msg) {
         responseText = [
             "📝 Ready to get you registered!",
             "I'm here to assist you with the registration process or answer any questions along the way.",
-            "📄 Use this link to get access Accout Resgistration http://localhost:3000/register "
+            "📄 Use this link to get access Accout Resgistration <a href = 'http://localhost:3000/register'>click this</a>"
         ]
         buttons = getButtonsForSection('englishRegister');
 
