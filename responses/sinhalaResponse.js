@@ -1,11 +1,11 @@
 const { getButtonsForSection } = require('../services/sectionService');
-const { customerCareResponse } = require('./sinhala/customCareResponse');
-const { findDoctorResponse } = require('./sinhala/findDocotorResponse');
+const { customerCareResponse } = require('./sinhala/customeCareResponse');
+const { findDoctorResponse } = require('./sinhala/findDoctorResponse');
 const { webNavigationResponse } = require('./sinhala/webNavigationResponse')
 
 const navigationKeywords = [
     'වෙබ් සංචාලනය',
-    'ලියාපදිංචිය',
+    'ලියාපදිංචි කරන්න',
     'වෛද්‍ය පැකේජ',
     'ෆාමසිය',
     'බෙහෙත් වට්ටෝරු ඉතිහාසය',
@@ -19,7 +19,7 @@ const customeCareKeywords = [
 
 ]
 
-async function englishResponse(msg) {
+async function sinhalaResponse(msg) {
     let responseText = '';
     let buttons = [];
 
@@ -41,4 +41,4 @@ async function englishResponse(msg) {
     return { responseText, buttons };
 }
 
-module.exports = { englishResponse  };
+module.exports = { sinhalaResponse  };

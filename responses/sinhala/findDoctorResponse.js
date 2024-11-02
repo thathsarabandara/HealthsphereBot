@@ -1,6 +1,6 @@
 const { getButtonsForSection } = require('../../services/sectionService');
-const { categoryResponse } = require('./categoryResponse');
-const { categorizeSymptoms } = require('./catgorizeSymptoms');
+const { categoryResponses } = require('./categoryResponse');
+const { categorizeSymptoms } = require('./categorizeSymptoms');
 
 const categoryKeywordList = [
     'වර්ගය මගින්',
@@ -22,26 +22,26 @@ async function findDoctorResponse(msg) {
     let responseText = '';
     let buttons = [];
 
-    if (msg.includes('Find Doctor')) {
+    if (msg.includes('වෛද්‍යවරයා සොයන්න')) {
         responseText = [
             "🎉 Find Doctor අංශයට සාදරයෙන් පිළිගනිමු!",
             "🤗 ඔබේ අවශ්‍යතා මත පදනම්ව නිවැරදි විශේෂඥයා සොයා ගැනීමට ඔබට උදවු කිරීමට මම මෙහි සිටිමි. ඔබට ප්‍රවර්ගය අනුව, නම අනුව, හෝ ඔබේ රෝග ලක්ෂණ මත පදනම්ව සෙවිය හැක.",
             "💬 ඔබ ඉදිරියට යාමට කැමති ආකාරය මට දන්වන්න, නැතහොත් පහත විකල්පයක් තෝරන්න."
             ];
-        buttons = getButtonsForSection('englishFindDoctor'); 
+        buttons = getButtonsForSection('sinhalaFindDoctor'); 
 
     } else if (categoryKeywordList.some(keyword => msg.includes(keyword))) {
-        ({ responseText, buttons } = await categoryResponse(msg));
+        ({ responseText, buttons } = await categoryResponses(msg));
 
-    } else if (msg.includes('By Name')) {
+    } else if (msg.includes('නම මගින්')) {
         responseText = [
             "🔍 නමින් සොයන්න විශේෂාංගය දැනට නොමැත.",
             "📅 අපහසුතාවයට අපි සමාව අයදිමු. මේ අතරතුර, මට ඔබට වෛද්‍යවරුන් කාණ්ඩ අනුව හෝ රෝග ලක්ෂණ මත පදනම්ව සොයා ගැනීමට උදවු කළ හැක.",
             "💡 කරුණාකර පහත විකල්පයක් තෝරන්න, නැතහොත් මට සහාය විය හැක්කේ කෙසේදැයි මට දන්වන්න!"
             ];
-        buttons = getButtonsForSection('englishFindDoctorUnavailable');
+        buttons = getButtonsForSection('sinhalaRegister');
 
-    } else if (msg.includes('By Symptoms')) {
+    } else if (msg.includes('ලක්ෂණ මගින්')) {
         responseText = [
             "📝 කරුණාකර මට ඔබේ රෝග ලක්ෂණ එවන්න.",
             "💬 ඔබේ රෝග ලක්ෂණ පැහැදිලිව විස්තර කරන්න, මම ඔබට නිවැරදි විශේෂඥයා වෙත යොමු කරන්නම්."
@@ -57,7 +57,7 @@ async function findDoctorResponse(msg) {
                 "📞 වැඩිදුර සහාය සඳහා, ඔබට අපගේ පාරිභෝගික සේවා හා සම්බන්ධ විය හැක, නැතහොත් ඔබට සෘජුවම හමුවීමක් උපලේඛනගත කළ හැක.",
                 "📄 ඔබට GP සමඟ හමුවීමක් උපලේඛනගත කළ හැක: <a href='http://localhost:3000/finddoctors/generalpractitioner'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorGeneralPractitioner');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'ළමා රෝග විශේෂඥ') {
             responseText = [
@@ -65,7 +65,7 @@ async function findDoctorResponse(msg) {
                 "💬 වැඩිදුර සහාය සඳහා, පාරිභෝගික සේවා වෙත සම්බන්ධ වන්න හෝ මෙහි හමුවීමක් උපලේඛනගත කරන්න.",
                 "📄 ළමා රෝග විශේෂඥ වෛද්‍යවරයකු මෙහි වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/pediatrician'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorPediatrician');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'හෘද රෝග විශේෂඥ') {
             responseText = [
@@ -73,7 +73,7 @@ async function findDoctorResponse(msg) {
                 "📞 ඔබට තවත් උදවු අවශ්‍ය නම්, හෝ හමුවීමක් උපලේඛනගත කිරීමට පාරිභෝගික සත්කාරය අමතන්න.",
                 "📄 හෘද රෝග විශේෂඥයෙකු මෙහි වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/cardiologist'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorCardiologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'චර්ම රෝග විශේෂඥ') {
             responseText = [
@@ -81,7 +81,7 @@ async function findDoctorResponse(msg) {
                 "💬 උපකාර සඳහා, ඔබට පාරිභෝගික සේවා වෙත සම්බන්ධ වීමට හෝ සෘජුවම හමුවීමක් වෙන්කරවා ගැනීමට හැකිය.",
                 "📄 මෙහි චර්ම රෝග විශේෂඥ වෛද්‍යවරයකු වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/dermatologist'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorDermatologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'ස්නායු වෛද්‍ය') {
             responseText = [
@@ -89,7 +89,7 @@ async function findDoctorResponse(msg) {
                 "📞 ඔබට වැඩි විස්තර සඳහා පාරිභෝගික සේවා සම්බන්ධ කර ගැනීමට හෝ හමුවීමක් උපලේඛනගත කළ හැක.",
                 "📄 මෙහි ස්නායු විශේෂඥයෙකු වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/neurologist'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorNeurologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'පිළිකා වෛද්‍ය') {
             responseText = [
@@ -97,7 +97,7 @@ async function findDoctorResponse(msg) {
                 "💬 Contact Customer Care if you need further assistance, or you can schedule an appointment.",
                 "📄 Book an Oncologist here: <a href='http://localhost:3000/finddoctors/oncologist'>click here</a>"
             ];
-            buttons = getButtonsForSection('englishFindDoctorOncologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'මනෝ වෛද්‍ය') {
             responseText = [
@@ -105,7 +105,7 @@ async function findDoctorResponse(msg) {
                 "💬 පාරිභෝගික සේවා වෙත සම්බන්ධ වීමට හෝ හමුවීමක් වෙන්කරවා ගැනීමට නිදහස් වන්න.",
                 "📄 මෙතැනින් මනෝ වෛද්‍යවරයකු වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/psychiatrist'>මෙතන ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorPsychiatrist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'එන්ඩොක්‍රිනොලොජිස්ට්') {
             responseText = [
@@ -113,7 +113,7 @@ async function findDoctorResponse(msg) {
                 "💬 වැඩි උපකාර සඳහා පාරිභෝගික සේවා අමතන්න, නැතහොත් හමුවීමක් උපලේඛනගත කරන්න.",
                 "📄 අන්තරාසර්ග විද්‍යාඥයෙකු මෙහි වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/endocrinologist'>මෙතන ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorEndocrinologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'ආමාශ රෝග විශේෂඥ') {
             responseText = [
@@ -121,7 +121,7 @@ async function findDoctorResponse(msg) {
                 "💬 වැඩිදුර සහාය සඳහා, පාරිභෝගික සේවා අමතන්න හෝ හමුවීමක් වෙන්කරවා ගන්න.",
                 "📄 Gastroenterologist කෙනෙක් මෙතනින් වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/gastroenterologist'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorGastroenterologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'විකලාංග ශල්‍ය වෛද්‍ය') {
             responseText =[
@@ -129,7 +129,7 @@ async function findDoctorResponse(msg) {
                 "📞 උදවු සඳහා පාරිභෝගික සේවා අමතන්න, නැතහොත් හමුවීමක් උපලේඛනගත කරන්න.",
                 "📄 විකලාංග ශල්‍ය වෛද්‍යවරයකු මෙහි වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/orthopedicsurgeon'>මෙතන ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorOrthopedic');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'අක්ෂි වෛද්‍ය') {
             responseText =[
@@ -137,7 +137,7 @@ async function findDoctorResponse(msg) {
                 "💬 ඔබට පාරිභෝගික සේවා හා සම්බන්ධ වීමට හෝ හමුවීමක් සෘජුවම උපලේඛනගත කළ හැක.",
                 "📄 අක්ෂි වෛද්‍යවරයකු මෙහි වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/ophthalmologist'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorOphthalmologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else if (category === 'පුල්මනොලොජිස්ට්') {
             responseText = [
@@ -145,14 +145,14 @@ async function findDoctorResponse(msg) {
                 "💬 පාරිභෝගික සේවා සම්බන්ධ කර ගැනීමට හෝ හමුවීමක් වෙන්කරවා ගැනීමට නිදහස් වන්න.",
                 "📄 පුඵ්ඵුසීය වෛද්‍යවරයකු මෙහි වෙන්කරවා ගන්න: <a href='http://localhost:3000/finddoctors/pulmonologist'>මෙහි ක්ලික් කරන්න</a>"
                 ];
-            buttons = getButtonsForSection('englishFindDoctorPulmonologist');
+            buttons = getButtonsForSection('sinhalaRegister');
 
         } else {
             responseText = [
-                `🔍 ඔබේ රෝග ලක්ෂණ මත පදනම්ව, ${ප්‍රවර්ගය} සමඟ උපදේශනය යෝග්‍ය වනු ඇත.`,
+                `🔍 ඔබේ රෝග ලක්ෂණ මත පදනම්ව,සමඟ උපදේශනය යෝග්‍ය වනු ඇත.`,
                 "💡 කරුණාකර වැඩි උපකාර සඳහා පාරිභෝගික සේවා වෙත සම්බන්ධ වන්න හෝ හමුවීමක් වෙන්කරවා ගැනීමට සපයා ඇති සබැඳිය භාවිතා කරන්න."
                 ];
-            buttons = getButtonsForSection('english');
+            buttons = getButtonsForSection('sinhalaRegister');
         }
     }
 

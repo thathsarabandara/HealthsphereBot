@@ -1,6 +1,6 @@
 const { getButtonsForSection } = require('../services/sectionService');
-const { customerCareResponse } = require('./tamil/customCareResponse');
-const { findDoctorResponse } = require('./tamil/findDocotorResponse');
+const { customerCareResponse } = require('./tamil/customeCareResponse');
+const { findDoctorResponse } = require('./tamil/findDoctorResponse');
 const { webNavigationResponse } = require('./tamil/webNavigationResponse')
 
 const navigationKeywords = [
@@ -19,7 +19,7 @@ const customeCareKeywords = [
 
 ]
 
-async function englishResponse(msg) {
+async function tamilResponse(msg) {
     let responseText = '';
     let buttons = [];
 
@@ -41,4 +41,4 @@ async function englishResponse(msg) {
     return { responseText, buttons };
 }
 
-module.exports = { englishResponse  };
+module.exports = { tamilResponse  };

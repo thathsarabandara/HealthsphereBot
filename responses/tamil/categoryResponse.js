@@ -1,6 +1,6 @@
 const { getButtonsForSection } = require('../../services/sectionService');
 
-function categoryResponse(msg) {
+function categoryResponses(msg) {
     let responseText = '';
     let buttons = [];
 
@@ -127,4 +127,4 @@ function categoryResponse(msg) {
     return { responseText, buttons };
 }
 
-module.exports = { categoryResponse };
+module.exports = { categoryResponses };

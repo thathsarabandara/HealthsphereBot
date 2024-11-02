@@ -18,7 +18,7 @@ function customerCareResponse(msg) {
             "I'm here to answer your frequently asked questions and provide guidance on any specific queries you may have.",
             "🔎 What would you like to know about today?"
         ];
-        buttons = getButtonsForSection('englishFAQs');
+        buttons = getButtonsForSection('englishRegister');
 
     } else if (msg.includes('Talk to Representative')) {
         responseText = [
@@ -26,7 +26,7 @@ function customerCareResponse(msg) {
             "I'm here to help bridge the gap and connect you with our support team for personalized assistance.",
             "💬 How can I assist you further before I connect you?"
         ];
-        buttons = getButtonsForSection('englishRepresentative');
+        buttons = getButtonsForSection('englishRegister');
 
     }
     

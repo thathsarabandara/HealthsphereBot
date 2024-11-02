@@ -1,6 +1,6 @@
 const { getButtonsForSection } = require('../../services/sectionService');
 const { categoryResponse } = require('./categoryResponse');
-const { categorizeSymptoms } = require('./catgorizeSymptoms');
+const { categorizeSymptoms } = require('./categorizeSymptoms');
 
 const categoryKeywordList = [
     'By Category',
@@ -39,7 +39,7 @@ async function findDoctorResponse(msg) {
             "📅 We apologize for the inconvenience. In the meantime, I can help you find doctors by category or based on symptoms.",
             "💡 Please choose an option below, or let me know how else I can assist!"
         ];
-        buttons = getButtonsForSection('englishFindDoctorUnavailable');
+        buttons = getButtonsForSection('englishRegister');
 
     } else if (msg.includes('By Symptoms')) {
         responseText = [
